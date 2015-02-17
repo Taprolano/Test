@@ -24,13 +24,17 @@ function buildMemberRows(members) {
     return _.template( $( "#member-tmpl" ).html(), {"members": members});
 }
 
+function getPath(){
+    return "http://demo.silicondev.com/test-html5-mobile/"
+}
+
 /* Uses JAX-RS GET to retrieve current member list */
 function updateMemberTable() {
     // Display the loader widget
     $.mobile.loading("show");
 
     $.ajax({
-        url: "rest/members",
+        url: getPath() + "rest/members",
         cache: false,
         success: function(data) {
             $( "#members" ).empty().append(buildMemberRows(data));
@@ -60,7 +64,7 @@ function registerMember(memberData) {
     $.mobile.loading("show");
 
     $.ajax({
-        url: 'rest/members',
+        url: getPath() + 'rest/members',
         contentType: "application/json",
         dataType: "json",
         type: "POST",
